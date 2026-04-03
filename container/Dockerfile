@@ -5,6 +5,9 @@ FROM node:22-slim
 
 # Install system dependencies for Chromium
 RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-venv \
     chromium \
     fonts-liberation \
     fonts-noto-cjk \
@@ -25,6 +28,9 @@ RUN apt-get update && apt-get install -y \
     curl \
     git \
     && rm -rf /var/lib/apt/lists/*
+
+# Make python3 available as python
+RUN ln -sf /usr/bin/python3 /usr/bin/python
 
 # Set Chromium path for agent-browser
 ENV AGENT_BROWSER_EXECUTABLE_PATH=/usr/bin/chromium
